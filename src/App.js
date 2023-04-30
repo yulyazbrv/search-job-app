@@ -7,7 +7,8 @@ import { HeaderContent } from './components/header';
 
 function App() {
   return (
-    <MantineProvider theme={{ fontFamily: 'Inter, sans-serif' }}>
+    <MantineProvider
+      theme={{ fontFamily: 'Inter, sans-serif', lineHeight: '1rem' }}>
       <AppShell
         header={
           <Header height={84} pl={162} pr={162}>

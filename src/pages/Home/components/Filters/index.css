@@ -1,0 +1,41 @@
+.filter-wrapper {
+  background: #ffffff;
+  border: 1px solid #eaebed;
+  border-radius: 12px;
+  width: 275px;
+  height: 320px;
+  padding: 20px;
+}
+
+.reset-icon {
+  height: 16px;
+  width: 16px;
+}
+
+.filter-title {
+  font-weight: 700;
+  font-size: 20px;
+  color: #232134;
+}
+
+.reset-title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #acadb9;
+}
+
+.filter-select-title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #232134;
+  margin-bottom: 8px;
+}
+
+.filter-apply {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #ffffff;
+}
