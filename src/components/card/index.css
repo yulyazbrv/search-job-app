@@ -37,3 +37,7 @@
   line-height: 19px;
   color: #232134;
 }
+
+.card-star {
+  cursor: pointer;
+}

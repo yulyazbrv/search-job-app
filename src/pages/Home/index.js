@@ -6,7 +6,7 @@ import { useAuth } from '../../core/auth/useAuth';
 const Home = () => {
   const { isLoading } = useAuth();
   return (
-    <Flex justify={'center'} gap={28}>
+    <Flex justify={'center'} gap={28} mt={24}>
       <Filters />
       <Vacancies isLoading={isLoading} />
     </Flex>

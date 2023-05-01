@@ -1,4 +1,4 @@
-import { getHelper, setAccessTokenToHeader } from '../helpers/apiHelper';
+import { getHelper } from '../helpers/apiHelper';
 
 export const auth = async () => {
   const response = await getHelper('oauth2/password', {
@@ -10,5 +10,5 @@ export const auth = async () => {
     hr: 0,
   });
 
-  setAccessTokenToHeader(response.access_token);
+  return response.access_token;
 };
