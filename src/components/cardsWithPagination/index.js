@@ -12,16 +12,26 @@ const CardsWithPagination = (props) => {
     activePage,
     setPage,
     totalPages,
+    favoriteActivePage,
+    setFavoritePage
   } = props;
-
+  
   const [state, dispatch] = useReducer(favoritesReducer, {
     favoritesVacancies: getFavoriteVacancies(),
   });
-
-  const currentVacancies = isFavorite ? state.favoritesVacancies : vacancies;
+  const getFavorite = (page, count) => {
+    console.log("sdsdsd0", state.favoritesVacancies);
+    return state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count)
+  }
+  const currentFavoritesVacancies = getFavorite(
+    favoriteActivePage,
+    4
+  );
+  const currentVacancies = isFavorite ? currentFavoritesVacancies : vacancies;
+  const favoriteTotalPages = state.favoritesVacancies.length / 4;
 
   return currentVacancies.length ? (
-    <Flex direction="column" gap={16} mt={24}>
+    <Flex direction="column" gap={16}>
       {currentVacancies.map((item) => (
         <Card
           key={item.id}
@@ -36,10 +46,10 @@ const CardsWithPagination = (props) => {
         />
       ))}
       <Pagination
-        total={totalPages}
+        total={isFavorite ? favoriteTotalPages : totalPages}
         position="center"
-        value={activePage}
-        onChange={setPage}
+        value={isFavorite ? favoriteActivePage : activePage}
+        onChange={isFavorite ? setFavoritePage : setPage}
       />
     </Flex>
   ) : emptyComponent ? (
