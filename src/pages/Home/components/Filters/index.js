@@ -1,16 +1,25 @@
 import './index.css';
 import ResetIcon from './assets/remove.png';
-import { Button, Flex, Select } from '@mantine/core';
+import { Button, Flex, NumberInput, Select } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons-react';
 import { useCatalogues } from '../../../../core/catalogues/useCatalogues';
+import { useState } from 'react';
 
 const selectStyles = {
   input: { borderRadius: 8, height: 42 },
   rightSection: { pointerEvents: 'none' },
 };
 
-const Filters = () => {
+const Filters = (props) => {
+  const { setFilters } = props;
   const { data: catalogues } = useCatalogues();
+  const [catalog, setCatalog] = useState('');
+  const [paymentFrom, setPaymentFrom] = useState('');
+  const [paymentTo, setPaymentTo] = useState('');
+
+  const applyFilters = () => {
+    setFilters(catalog, paymentFrom, paymentTo)
+  };
 
   return (
     <div className="filter-wrapper">
@@ -29,18 +38,28 @@ const Filters = () => {
           rightSectionWidth={30}
           styles={selectStyles}
           data={catalogues ? catalogues.map((item) => item.title_rus) : []}
+          value={catalog}
+          onChange={setCatalog}
         />
         <Flex direction={'column'} gap={8}>
-          <Select
+          <NumberInput
             label={<p className="filter-select-title">Оклад</p>}
             placeholder="От"
             styles={selectStyles}
-            data={['React', 'Angular', 'Svelte', 'Vue']}
+            min={0}
+            max={500000}
+            step={100}
+            value={paymentFrom}
+            onChange={setPaymentFrom}
           />
-          <Select
+          <NumberInput
             placeholder="До"
             styles={selectStyles}
-            data={['React', 'Angular', 'Svelte', 'Vue']}
+            min={0}
+            max={500000}
+            step={100}
+            value={paymentTo}
+            onChange={setPaymentTo}
           />
         </Flex>
       </Flex>
@@ -48,6 +67,7 @@ const Filters = () => {
         radius={8}
         color="#5E96FC"
         mt={20}
+        onClick={applyFilters}
         styles={{ root: { height: 40, width: '100%' } }}>
         <p className="filter-apply">Применить</p>
       </Button>

@@ -6,11 +6,17 @@ import { CardsWithPagination } from '../../../../components/cardsWithPagination'
 import './index.css';
 
 const Vacancies = (props) => {
-  const { isLoading } = props;
+  const { isLoading, setSearch, vacancySettings } = props;
+  const { catalog, payment_from, payment_to } = vacancySettings;
   const [activePage, setPage] = useState(1);
+  const [keyword, setKeyword] = useState();
   const { data: vacancies, isFetching: isVacanciesLoading } = useVacancies(
     activePage,
-    4
+    4,
+    catalog,
+    payment_from,
+    payment_to,
+    keyword
   );
   const totalPages = vacancies ? Math.floor(vacancies.total / 4) : 100;
 
@@ -23,8 +29,16 @@ const Vacancies = (props) => {
       <Input
         icon={<IconSearch size="1rem" />}
         placeholder="Введите название вакансии"
+        onChange={(e) => {
+          setKeyword(e.target.value);
+        }}
         rightSection={
-          <Button radius={8} styles={{ root: { height: 32, marginRight: 12 } }}>
+          <Button
+            onClick={() => {
+              setSearch(keyword);
+            }}
+            radius={8}
+            styles={{ root: { height: 32, marginRight: 12 } }}>
             <p className="search">Поиск</p>
           </Button>
         }

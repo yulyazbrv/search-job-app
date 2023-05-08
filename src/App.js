@@ -4,6 +4,7 @@ import { Favorites } from './pages/Favorites';
 import { Home } from './pages/Home';
 import { AppShell, Header, MantineProvider } from '@mantine/core';
 import { HeaderContent } from './components/header';
+import { Vacancy } from './pages/Home/components/Vacancy';
 
 function App() {
   return (
@@ -19,8 +20,11 @@ function App() {
           main: { backgroundColor: '#f7f7f8' },
         })}>
         <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/favorites" element={<Favorites></Favorites>}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/favorites" element={<Favorites />}></Route>
+          <Route path="/vacancy">
+            <Route path=":id" element={<Vacancy />}></Route>
+          </Route>
         </Routes>
       </AppShell>
     </MantineProvider>
