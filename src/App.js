@@ -13,7 +13,6 @@ function App() {
   useEffect(() => {
     return () => {
       localStorage.removeItem('filters');
-      console.log("clear");
     };
   }, []);
   return (
