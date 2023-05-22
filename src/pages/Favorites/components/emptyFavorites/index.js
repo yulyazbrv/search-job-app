@@ -1,4 +1,4 @@
-import { Button, Flex, em } from '@mantine/core';
+import { Button, Flex } from '@mantine/core';
 import emptyIcon from './assets/empty.png';
 import './index.css';
 
