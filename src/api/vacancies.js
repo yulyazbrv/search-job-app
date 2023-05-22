@@ -15,6 +15,8 @@ export const getVacancies = async (
     payment_from,
     payment_to,
     keyword,
+    published: 1,
+    no_agreement: payment_from >= 0 ? 1 : 0,
   });
 
   return response;

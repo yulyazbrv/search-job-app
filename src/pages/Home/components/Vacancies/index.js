@@ -4,12 +4,14 @@ import { IconSearch } from '@tabler/icons-react';
 import { useVacancies } from '../../../../core/vacancies/useVacancies';
 import { CardsWithPagination } from '../../../../components/cardsWithPagination';
 import './index.css';
+import { useNavigate } from 'react-router-dom';
 
 const Vacancies = (props) => {
   const { isLoading, setSearch, vacancySettings } = props;
   const { catalog, payment_from, payment_to } = vacancySettings;
   const [activePage, setPage] = useState(1);
   const [keyword, setKeyword] = useState();
+  const navigate = useNavigate();
   const { data: vacancies, isFetching: isVacanciesLoading } = useVacancies(
     activePage,
     4,
@@ -19,14 +21,14 @@ const Vacancies = (props) => {
     keyword
   );
   const totalPages = vacancies ? Math.floor(vacancies.total / 4) : 100;
+  const showVacancy = (id) => {
+    navigate(`vacancy/${id}`);
+  };
 
   return (
-    <Flex direction={'column'} gap={16} miw={773} className="vacancies">
-      <LoadingOverlay
-        visible={isLoading || isVacanciesLoading}
-        overlayBlur={2}
-      />
+    <Flex direction={'column'} gap={16} w={773} className='vacancies'>
       <Input
+        data-elem="search-input"
         icon={<IconSearch size="1rem" />}
         placeholder="Введите название вакансии"
         onChange={(e) => {
@@ -34,6 +36,7 @@ const Vacancies = (props) => {
         }}
         rightSection={
           <Button
+            data-elem="search-button"
             onClick={() => {
               setSearch(keyword);
             }}
@@ -47,14 +50,26 @@ const Vacancies = (props) => {
           input: { height: 48, borderColor: '#EAEBED', borderRadius: 8 },
         }}
       />
-      {vacancies ? (
-        <CardsWithPagination
-          vacancies={vacancies.objects}
-          activePage={activePage}
-          setPage={setPage}
-          totalPages={totalPages > 100 ? 100 : totalPages}
+      <Flex
+        direction={'column'}
+        gap={16}
+        w={773}
+        mih={500}
+        className="vacancies">
+        <LoadingOverlay
+          visible={isLoading || isVacanciesLoading}
+          overlayBlur={2}
         />
-      ) : null}
+        {vacancies ? (
+          <CardsWithPagination
+            vacancies={vacancies.objects}
+            activePage={activePage}
+            setPage={setPage}
+            totalPages={totalPages > 100 ? 100 : totalPages}
+            showVacancy={showVacancy}
+          />
+        ) : null}
+      </Flex>
     </Flex>
   );
 };

@@ -5,14 +5,26 @@ import { Home } from './pages/Home';
 import { AppShell, Header, MantineProvider } from '@mantine/core';
 import { HeaderContent } from './components/header';
 import { Vacancy } from './pages/Home/components/Vacancy';
+import { useMediaQuery } from '@mantine/hooks';
+import { useEffect } from 'react';
 
 function App() {
+  const matches = useMediaQuery('(max-width: 1000px)');
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem('filters');
+      console.log("clear");
+    };
+  }, []);
   return (
     <MantineProvider
       theme={{ fontFamily: 'Inter, sans-serif', lineHeight: '1rem' }}>
       <AppShell
         header={
-          <Header height={84} pl={162} pr={162}>
+          <Header
+            height={matches ? 115 : 84}
+            pl={matches ? 20 : 162}
+            pr={matches ? 20 : 162}>
             {<HeaderContent />}
           </Header>
         }

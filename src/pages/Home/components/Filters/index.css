@@ -39,3 +39,21 @@
   line-height: 21px;
   color: #ffffff;
 }
+
+.reset-container {
+  cursor: pointer;
+}
+
+@media (max-width: 1150px) {
+  .filter-wrapper {
+    width: 773px;
+    box-sizing: border-box;
+    height: 100%;
+  }
+}
+
+@media (max-width: 850px) {
+  .filter-wrapper {
+    width: 100%;
+  }
+}

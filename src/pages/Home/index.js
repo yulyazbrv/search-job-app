@@ -3,6 +3,7 @@ import { Filters } from './components/Filters';
 import { Vacancies } from './components/Vacancies';
 import { useAuth } from '../../core/auth/useAuth';
 import { useState } from 'react';
+import "./index.css"
 
 const Home = () => {
   const { isLoading } = useAuth();
@@ -26,7 +27,7 @@ const Home = () => {
   };
 
   return (
-    <Flex justify={'center'} gap={28} mt={24}>
+    <Flex className='home-wrapper' justify={'center'} gap={28} mt={24}>
       <Filters setFilters={setFilters} />
       <Vacancies vacancySettings={vacancySettings} setSearch={setSearch} isLoading={isLoading} />
     </Flex>

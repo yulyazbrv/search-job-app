@@ -1,0 +1,19 @@
+.vacancy-info {
+  border-radius: 12px;
+  border: 1px solid #EAEBED;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+}
+
+@media (max-width: 850px) {
+  .vacancy-info {
+    width: 100%;
+
+  }
+}
+@media (max-width: 576px) {
+  .vacancy-info-text{
+    font-size: 12px;
+  }
+}
+

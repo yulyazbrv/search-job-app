@@ -8,3 +8,9 @@
 .vacancies {
   position: relative;
 }
+
+@media (max-width: 850px) {
+  .vacancies {
+    width: 100%;
+  }
+}

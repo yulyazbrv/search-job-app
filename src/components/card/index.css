@@ -1,6 +1,8 @@
 .card {
   border-radius: 12px;
   border: 1px solid #EAEBED;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
 .card-title {
@@ -40,4 +42,41 @@
 
 .card-star {
   cursor: pointer;
+  display: flex;
+}
+
+@media (max-width: 850px) {
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-title {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  
+  .card-salary {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  
+  .card-dot {
+    font-size: 16px;
+    line-height: 17px;
+  }
+  
+  .card-time {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  
+  .card-location {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  
 }
