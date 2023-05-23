@@ -23,7 +23,7 @@ const CardsWithPagination = (props) => {
 
   const getFavorite = (page, count) => {
     const startIndex = (page - 1) * count;
-    const endIndex = Math.min(startIndex + count, state.favoritesVacancies.length);
+    const endIndex = page * count;
     return state.favoritesVacancies.slice(startIndex, endIndex);
   };
   const currentFavoritesVacancies = getFavorite(favoriteActivePage, 4);
