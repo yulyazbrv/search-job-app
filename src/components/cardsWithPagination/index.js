@@ -27,7 +27,7 @@ const CardsWithPagination = (props) => {
     : vacancies;
 
   const currentTotalPages = isFavorite
-    ? Math.ceil((state.favoritesVacancies.length - 1) / 4)
+    ? Math.ceil((state.favoritesVacancies.length) / 4)
     : totalPages;
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const CardsWithPagination = (props) => {
   }, [activePage, currentVacancies.length, setPage, isFavorite]);
 
   return currentVacancies.length ? (
-    
+
     <Flex direction="column" gap={16}>
       {currentVacancies.map((item) => (
         <Card
