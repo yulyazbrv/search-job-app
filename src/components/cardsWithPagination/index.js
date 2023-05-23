@@ -1,5 +1,5 @@
 import { Flex, Pagination } from '@mantine/core';
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { Card } from '../card';
 import { favoritesReducer } from '../../store/favoritesVacancies';
 import { getFavoriteVacancies } from '../../helpers/favoriteVacanciesHelper';
@@ -26,10 +26,17 @@ const CardsWithPagination = (props) => {
     // const endIndex = page + count;
     return state.favoritesVacancies.slice((page - 1) * count, (page - 1) * count + 4);
   };
+
   const currentFavoritesVacancies = getFavorite(favoriteActivePage, 4);
   const currentVacancies = isFavorite ? currentFavoritesVacancies : vacancies;
-  const favoriteTotalPages = state.favoritesVacancies.length / 4;
+  const favoriteTotalPages = Math.ceil((state.favoritesVacancies.length - 1) / 4);
 
+  useEffect(() => {
+    if(currentVacancies.length === 0 && activePage > 1 ) {
+      setPage(activePage - 1)
+    }
+  }, [activePage, currentVacancies.length, setPage])
+ 
   return currentVacancies.length ? (
     <Flex direction="column" gap={16}>
       {currentVacancies.map((item) => (
