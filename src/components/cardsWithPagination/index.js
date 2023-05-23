@@ -14,31 +14,20 @@ const CardsWithPagination = (props) => {
     totalPages,
     favoriteActivePage,
     setFavoritePage,
-    showVacancy
+    showVacancy,
   } = props;
-  
+
   const [state, dispatch] = useReducer(favoritesReducer, {
     favoritesVacancies: getFavoriteVacancies(),
   });
+
   const getFavorite = (page, count) => {
-    console.log("Внутри getFAvorite без слайса ", state.favoritesVacancies);
-    console.log("Внутри getFAvorite  ", state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count));
-    if(state.favoritesVacancies > 4){
-      return state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count)
-    }else{
-      return state.favoritesVacancies
-    }
-  }
-  console.log("favoriteActivePage ", favoriteActivePage);
-  const currentFavoritesVacancies = getFavorite(
-    favoriteActivePage,
-    4
-  );
-  const currentVacancies = isFavorite ? state.favoritesVacancies : vacancies;
-  console.log("favoritesVacancies ", state.favoritesVacancies);
-  console.log("currentFavoritesVacancies ",currentFavoritesVacancies );
-  console.log("isFavorite ",isFavorite);
-  console.log("currentVacancies ",currentVacancies);
+    const startIndex = (page - 1) * count;
+    const endIndex = startIndex + count;
+    return state.favoritesVacancies.slice(startIndex, endIndex);
+  };
+  const currentFavoritesVacancies = getFavorite(favoriteActivePage, 4);
+  const currentVacancies = isFavorite ? currentFavoritesVacancies : vacancies;
   const favoriteTotalPages = state.favoritesVacancies.length / 4;
 
   return currentVacancies.length ? (
