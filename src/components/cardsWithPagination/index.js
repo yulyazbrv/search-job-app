@@ -23,14 +23,18 @@ const CardsWithPagination = (props) => {
   const getFavorite = (page, count) => {
     console.log("Внутри getFAvorite без слайса ", state.favoritesVacancies);
     console.log("Внутри getFAvorite  ", state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count));
-    return state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count)
+    if(state.favoritesVacancies > 4){
+      return state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count)
+    }else{
+      return state.favoritesVacancies
+    }
   }
   console.log("favoriteActivePage ", favoriteActivePage);
   const currentFavoritesVacancies = getFavorite(
     favoriteActivePage,
     4
   );
-  const currentVacancies = isFavorite ? currentFavoritesVacancies : vacancies;
+  const currentVacancies = isFavorite ? state.favoritesVacancies : vacancies;
   console.log("favoritesVacancies ", state.favoritesVacancies);
   console.log("currentFavoritesVacancies ",currentFavoritesVacancies );
   console.log("isFavorite ",isFavorite);
