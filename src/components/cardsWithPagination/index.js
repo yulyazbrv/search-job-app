@@ -21,7 +21,8 @@ const CardsWithPagination = (props) => {
     favoritesVacancies: getFavoriteVacancies(),
   });
   const getFavorite = (page, count) => {
-    console.log("Внутри getFAvorite ", state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count));
+    console.log("Внутри getFAvorite без слайса ", state.favoritesVacancies);
+    console.log("Внутри getFAvorite  ", state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count));
     return state.favoritesVacancies.slice(page * 4 - 1, page * 4 - 1 + count)
   }
   const currentFavoritesVacancies = getFavorite(
