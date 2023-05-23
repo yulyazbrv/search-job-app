@@ -28,6 +28,10 @@ const CardsWithPagination = (props) => {
     4
   );
   const currentVacancies = isFavorite ? currentFavoritesVacancies : vacancies;
+  console.log("favoritesVacancies ", state.favoritesVacancies);
+  console.log("currentFavoritesVacancies ",currentFavoritesVacancies );
+  console.log("isFavorite ",isFavorite);
+  console.log("currentVacancies ",currentVacancies);
   const favoriteTotalPages = state.favoritesVacancies.length / 4;
 
   return currentVacancies.length ? (
