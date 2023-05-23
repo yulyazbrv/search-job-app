@@ -22,9 +22,9 @@ const CardsWithPagination = (props) => {
   });
 
   const getFavorite = (page, count) => {
-    const startIndex = (page - 1) * count;
-    const endIndex = page * count;
-    return state.favoritesVacancies.slice(startIndex, endIndex);
+    // const startIndex = (page - 1) * count;
+    // const endIndex = page + count;
+    return state.favoritesVacancies.slice((page - 1) * count, (page - 1) * count + 4);
   };
   const currentFavoritesVacancies = getFavorite(favoriteActivePage, 4);
   const currentVacancies = isFavorite ? currentFavoritesVacancies : vacancies;
