@@ -5,7 +5,7 @@ import { CardsWithPagination } from '../../components/cardsWithPagination';
 import { useNavigate } from 'react-router-dom';
 
 const Favorites = () => {
-  const [favoriteActivePage, setFavoritePage] = useState(1);
+  const [activePage, setPage] = useState(1);
   const navigate = useNavigate();
   const showVacancy = (id) => {
     navigate(`/vacancy/${id}`);
@@ -13,8 +13,8 @@ const Favorites = () => {
   return (
     <Flex justify="center" mt={24}>
       <CardsWithPagination
-        favoriteActivePage={favoriteActivePage}
-        setFavoritePage={setFavoritePage}
+        activePage={activePage}
+        setPage={setPage}
         isFavorite
         showVacancy={showVacancy}
         emptyComponent={<EmptyFavorites />}

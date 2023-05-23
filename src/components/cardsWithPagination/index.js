@@ -12,8 +12,6 @@ const CardsWithPagination = (props) => {
     activePage,
     setPage,
     totalPages,
-    favoriteActivePage,
-    setFavoritePage,
     showVacancy,
   } = props;
 
@@ -21,21 +19,25 @@ const CardsWithPagination = (props) => {
     favoritesVacancies: getFavoriteVacancies(),
   });
 
-  const getFavorite = (page, count) => {
-    return state.favoritesVacancies.slice((page - 1) * count, (page - 1) * count + 4);
-  };
+  const currentVacancies = isFavorite
+    ? state.favoritesVacancies.slice(
+        (activePage - 1) * 4,
+        (activePage - 1) * 4 + 4
+      )
+    : vacancies;
 
-  const currentFavoritesVacancies = getFavorite(favoriteActivePage, 4);
-  const currentVacancies = isFavorite ? currentFavoritesVacancies : vacancies;
-  const favoriteTotalPages = Math.ceil((state.favoritesVacancies.length - 1) / 4);
+  const currentTotalPages = isFavorite
+    ? Math.ceil((state.favoritesVacancies.length - 1) / 4)
+    : totalPages;
 
   useEffect(() => {
-    if(currentVacancies.length === 0 && favoriteActivePage > 1 ) {
-      setFavoritePage(favoriteActivePage - 1)
+    if (currentVacancies.length === 0 && activePage > 1 && isFavorite) {
+      setPage(activePage - 1);
     }
-  }, [favoriteActivePage, currentVacancies.length, setFavoritePage])
- 
+  }, [activePage, currentVacancies.length, setPage, isFavorite]);
+
   return currentVacancies.length ? (
+    
     <Flex direction="column" gap={16}>
       {currentVacancies.map((item) => (
         <Card
@@ -52,10 +54,10 @@ const CardsWithPagination = (props) => {
         />
       ))}
       <Pagination
-        total={isFavorite ? favoriteTotalPages : totalPages}
+        total={currentTotalPages}
         position="center"
-        value={isFavorite ? favoriteActivePage : activePage}
-        onChange={isFavorite ? setFavoritePage : setPage}
+        value={activePage}
+        onChange={setPage}
       />
     </Flex>
   ) : emptyComponent ? (
