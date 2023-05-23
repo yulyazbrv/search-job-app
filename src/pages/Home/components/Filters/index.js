@@ -34,7 +34,6 @@ const Filters = (props) => {
       const filters = { catalog, paymentFrom, paymentTo };
       if (filters.catalog || filters.paymentFrom || filters.paymentTo) {
         localStorage.setItem('filters', JSON.stringify(filters));
-        console.log("set");
       }
     };
   }, [catalog, paymentFrom, paymentTo]);
