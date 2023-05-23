@@ -22,8 +22,6 @@ const CardsWithPagination = (props) => {
   });
 
   const getFavorite = (page, count) => {
-    // const startIndex = (page - 1) * count;
-    // const endIndex = page + count;
     return state.favoritesVacancies.slice((page - 1) * count, (page - 1) * count + 4);
   };
 
@@ -32,10 +30,10 @@ const CardsWithPagination = (props) => {
   const favoriteTotalPages = Math.ceil((state.favoritesVacancies.length - 1) / 4);
 
   useEffect(() => {
-    if(currentVacancies.length === 0 && activePage > 1 ) {
-      setPage(activePage - 1)
+    if(currentVacancies.length === 0 && favoriteActivePage > 1 ) {
+      setFavoritePage(favoriteActivePage - 1)
     }
-  }, [activePage, currentVacancies.length, setPage])
+  }, [favoriteActivePage, currentVacancies.length, setFavoritePage])
  
   return currentVacancies.length ? (
     <Flex direction="column" gap={16}>
